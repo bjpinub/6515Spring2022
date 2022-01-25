@@ -40,7 +40,9 @@ def initTable(numItems, maxWt):
     """
     # TODO Replace the following with your code to initialize the table properly
 
-    T = [0][0]
+    #T = [0][0]
+    T = [[0] * maxWt] * numItems
+
     return T
 
 
