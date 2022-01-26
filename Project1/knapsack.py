@@ -68,7 +68,7 @@ def buildWeightIter(maxWt):
     # TODO Replace the following with your code to build the weight iterator
     # print("Cols: " + str([tmpWeight for tmpWeight in range(0, maxWt + 1)]))
 
-    return [tmpWeight for tmpWeight in range(0, maxWt + 1)]
+    return [tmpWeight for tmpWeight in range(1, maxWt + 1)]
 
 
 def subProblem(T, weight, itemIDX, itemWt, itemVal):
@@ -87,12 +87,13 @@ def subProblem(T, weight, itemIDX, itemWt, itemVal):
         tmpVal1 = T[itemIDX - 1][weight]
         tmpVal2 = T[itemIDX - 1][weight - itemWt] + itemVal
 
-        T[itemIDX][max(tmpVal1, tmpVal2)]
+        T[itemIDX][weight] = max(tmpVal1, tmpVal2)
     else:
-        return T[itemIDX - 1][weight]
+        T[itemIDX][weight] = T[itemIDX - 1][weight]
+
+    return T[itemIDX][weight]
 
     # print("T[" + str(itemIDX) + "][" + str(weight) + "]: " + str(T[itemIDX][itemWt]))
-    # return T[0][0]
 
 
 def buildResultList(T, itemsDict, maxWt):
@@ -104,6 +105,9 @@ def buildResultList(T, itemsDict, maxWt):
 
     	result: a list composed of item tuples
     """
+
+    # print("Max weight: " + str(T[len(T)-1][len(T[0])-1]))
+
     result = []
 
     # TODO Your code goes here to build the list of chosen items!
@@ -148,8 +152,8 @@ def main():
     # You may change default values, but any values you set will be overridden when autograded
     parser = argparse.ArgumentParser(description='Knapsack Coding Quiz')
     parser.add_argument('-i', '--items', help='File holding list of possible Items (name, wt, value)',
-                        default='defaultItems.txt', dest='itemsListFileName')
-    parser.add_argument('-w', '--weight', help='Maximum (integer) weight of items allowed', type=int, default=400,
+                        default='lectureItems.txt', dest='itemsListFileName')
+    parser.add_argument('-w', '--weight', help='Maximum (integer) weight of items allowed', type=int, default=22,
                         dest='maxWeight')
 
     # args for autograder, DO NOT MODIFY ANY OF THESE
