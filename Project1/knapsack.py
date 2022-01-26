@@ -27,6 +27,8 @@ About the Input:
         https://stackoverflow.com/questions/30062429/how-to-get-every-first-element-in-2-dimensional-list
         https://www.youtube.com/watch?v=xCbYmUPvc2Q
         https://www.geeksforgeeks.org/python-create-list-of-numbers-with-given-range/
+        https://stackoverflow.com/questions/2739552/2d-list-has-weird-behavor-when-trying-to-modify-a-single-value
+        https://www.geeksforgeeks.org/printing-items-01-knapsack/
 """
 import argparse  # argparse allows the parsing of command line arguments
 import GA_ProjectUtils as util  # utility functions for cs 6515 projects
@@ -42,7 +44,8 @@ def initTable(numItems, maxWt):
     """
     # TODO Replace the following with your code to initialize the table properly
 
-    tmpTable = [[0] * (maxWt + 1)] * (numItems + 1)
+    # tmpTable = [[0] * (maxWt + 1)] * (numItems + 1)
+    tmpTable = [[0] * (maxWt + 1) for tmpCol in range(numItems + 1)]
 
     return tmpTable
 
@@ -106,7 +109,9 @@ def buildResultList(T, itemsDict, maxWt):
     	result: a list composed of item tuples
     """
 
-    # print("Max weight: " + str(T[len(T)-1][len(T[0])-1]))
+    tmpTotalValue = T[len(itemsDict)][maxWt]
+
+    #print("Total Value: " + str(tmpTotalValue))
 
     result = []
 
@@ -152,8 +157,8 @@ def main():
     # You may change default values, but any values you set will be overridden when autograded
     parser = argparse.ArgumentParser(description='Knapsack Coding Quiz')
     parser.add_argument('-i', '--items', help='File holding list of possible Items (name, wt, value)',
-                        default='lectureItems.txt', dest='itemsListFileName')
-    parser.add_argument('-w', '--weight', help='Maximum (integer) weight of items allowed', type=int, default=22,
+                        default='defaultItems.txt', dest='itemsListFileName')
+    parser.add_argument('-w', '--weight', help='Maximum (integer) weight of items allowed', type=int, default=400,
                         dest='maxWeight')
 
     # args for autograder, DO NOT MODIFY ANY OF THESE
