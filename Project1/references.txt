@@ -1,0 +1,5 @@
+https://stackoverflow.com/questions/30062429/how-to-get-every-first-element-in-2-dimensional-list
+https://www.youtube.com/watch?v=xCbYmUPvc2Q
+https://www.geeksforgeeks.org/python-create-list-of-numbers-with-given-range/
+https://stackoverflow.com/questions/2739552/2d-list-has-weird-behavor-when-trying-to-modify-a-single-value
+https://www.geeksforgeeks.org/printing-items-01-knapsack/
