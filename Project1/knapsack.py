@@ -86,7 +86,9 @@ def subProblem(T, weight, itemIDX, itemWt, itemVal):
     """
     # TODO Replace the following with your code to solve the subproblem appropriately!
 
-    if itemWt <= weight:
+    if itemIDX == 0 or weight == 0:
+        T[itemIDX][weight] = 0
+    elif itemWt <= weight:
         tmpVal1 = T[itemIDX - 1][weight]
         tmpVal2 = T[itemIDX - 1][weight - itemWt] + itemVal
 
@@ -94,9 +96,9 @@ def subProblem(T, weight, itemIDX, itemWt, itemVal):
     else:
         T[itemIDX][weight] = T[itemIDX - 1][weight]
 
-    return T[itemIDX][weight]
-
     # print("T[" + str(itemIDX) + "][" + str(weight) + "]: " + str(T[itemIDX][itemWt]))
+
+    return T[itemIDX][weight]
 
 
 def buildResultList(T, itemsDict, maxWt):
@@ -108,14 +110,28 @@ def buildResultList(T, itemsDict, maxWt):
 
     	result: a list composed of item tuples
     """
-
-    tmpTotalValue = T[len(itemsDict)][maxWt]
-
-    #print("Total Value: " + str(tmpTotalValue))
+    # TODO Your code goes here to build the list of chosen items!
 
     result = []
+    tmpTotalValue = T[len(itemsDict)][maxWt]
+    tmpWeight = maxWt
 
-    # TODO Your code goes here to build the list of chosen items!
+    print("Total Value: " + str(tmpTotalValue))
+
+    for tmpCntr in range(len(itemsDict), 0, -1):
+        if tmpTotalValue <= 0:
+            break
+
+        if tmpTotalValue == T[tmpCntr - 1][tmpWeight]:
+            continue
+        else:
+            tmpItem = list(itemsDict.values())[tmpCntr - 1]
+
+            tmpTotalValue = tmpTotalValue - tmpItem[2]
+            tmpWeight = tmpWeight - tmpItem[1]
+
+            result.append(list(itemsDict.values())[tmpCntr - 1])
+
 
     return result
 
