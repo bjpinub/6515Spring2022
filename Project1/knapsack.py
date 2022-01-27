@@ -1,34 +1,21 @@
 # -*- coding: utf-8 -*-
+
 """
 knapsack.py - CS6515, Intro to Graduate Algorithms
-
 Implement a Dynamic Programming Solution to the knapsack problem.   The program will be given a
-dictionary of items and an overall weight limit.  It should select the combination of items 
-which achieves the highest value without exceeding the weight limit.    
-
+dictionary of items and an overall weight limit.  It should select the combination of items
+which achieves the highest value without exceeding the weight limit.
 NOTE:  Each item may be selected at most one time (non-repeating).
-
 About the Input:
-
 	itemsDict -- a dictionary of items, where the key is an integer 1...N (inclusive),
 	             and the value is a tuple (name, weight, value) where:
-
 			     name is the text name of the item
 				 weight is the item weight
 				 value is the item value
-
 	maxWt -- the maximum weight supported by the knapsack
-
 	There is at least one item available
 	All weights and values are >0
 	All test cases will have a solution (at least one item can be inserted in the knapsack)
-
-    References:
-        https://stackoverflow.com/questions/30062429/how-to-get-every-first-element-in-2-dimensional-list
-        https://www.youtube.com/watch?v=xCbYmUPvc2Q
-        https://www.geeksforgeeks.org/python-create-list-of-numbers-with-given-range/
-        https://stackoverflow.com/questions/2739552/2d-list-has-weird-behavor-when-trying-to-modify-a-single-value
-        https://www.geeksforgeeks.org/printing-items-01-knapsack/
 """
 import argparse  # argparse allows the parsing of command line arguments
 import GA_ProjectUtils as util  # utility functions for cs 6515 projects
@@ -44,7 +31,6 @@ def initTable(numItems, maxWt):
     """
     # TODO Replace the following with your code to initialize the table properly
 
-    # tmpTable = [[0] * (maxWt + 1)] * (numItems + 1)
     tmpTable = [[0] * (maxWt + 1) for tmpCol in range(numItems + 1)]
 
     return tmpTable
@@ -58,6 +44,7 @@ def buildItemIter(numItems):
     Note: the index (key value) for items are integer values 1..N
     """
     # TODO Replace the following with your code to build the item iterator
+
     # print("Rows: " + str([tmpItem for tmpItem in range(1, numItems + 1)]))
 
     return [tmpItem for tmpItem in range(1, numItems + 1)]
@@ -69,6 +56,7 @@ def buildWeightIter(maxWt):
         maxWt : maximum weight available
     """
     # TODO Replace the following with your code to build the weight iterator
+
     # print("Cols: " + str([tmpWeight for tmpWeight in range(0, maxWt + 1)]))
 
     return [tmpWeight for tmpWeight in range(1, maxWt + 1)]
@@ -116,7 +104,7 @@ def buildResultList(T, itemsDict, maxWt):
     tmpTotalValue = T[len(itemsDict)][maxWt]
     tmpWeight = maxWt
 
-    print("Total Value: " + str(tmpTotalValue))
+    # print("Total Value: " + str(tmpTotalValue))
 
     for tmpCntr in range(len(itemsDict), 0, -1):
         if tmpTotalValue <= 0:
@@ -131,7 +119,6 @@ def buildResultList(T, itemsDict, maxWt):
             tmpWeight = tmpWeight - tmpItem[1]
 
             result.append(list(itemsDict.values())[tmpCntr - 1])
-
 
     return result
 
@@ -159,7 +146,6 @@ def knapsack(itemsDict, maxWt):
         for w in weightIter:
             # expand table values by solving subproblem
             table[itmIdx][w] = subProblem(table, w, itmIdx, itemWt, itemVal)
-            # print("[itmIdx, w]: [" + str(itmIdx) + ", " + str(w) + "]")
 
     # build list of results - chosen items to maximize value for a given weight
     return buildResultList(table, itemsDict, maxWt)
