@@ -1,21 +1,30 @@
 # -*- coding: utf-8 -*-
 
 """
+
 knapsack.py - CS6515, Intro to Graduate Algorithms
+
 Implement a Dynamic Programming Solution to the knapsack problem.   The program will be given a
 dictionary of items and an overall weight limit.  It should select the combination of items
 which achieves the highest value without exceeding the weight limit.
+
 NOTE:  Each item may be selected at most one time (non-repeating).
+
 About the Input:
+
 	itemsDict -- a dictionary of items, where the key is an integer 1...N (inclusive),
 	             and the value is a tuple (name, weight, value) where:
+
 			     name is the text name of the item
 				 weight is the item weight
 				 value is the item value
+
 	maxWt -- the maximum weight supported by the knapsack
+
 	There is at least one item available
 	All weights and values are >0
 	All test cases will have a solution (at least one item can be inserted in the knapsack)
+
 """
 import argparse  # argparse allows the parsing of command line arguments
 import GA_ProjectUtils as util  # utility functions for cs 6515 projects
