@@ -33,7 +33,10 @@ def findXinA(x, findX):
 
     theIndex = None # replace None with the index of x
 
-    #Try to find the length of the array
+    #Try to find the length of the array;
+    #keep increasing the low and high values until
+    #the high value represents a None object in the array
+    #and the value in the high position doesn't exceed the value of x
     while tmpLookupVal is not None and tmpLookupVal < x:
         #Check if the counter happens to be the index; if it is,
         #set that it was found and break out of the loop
@@ -60,17 +63,25 @@ def findXinA(x, findX):
             # print(f"   tmpLookupVal: {tmpLookupVal}")
             # print(f"   x: {x}")
 
+            #Calculate the mid between the high and low by
+            #adding half the difference between the high and low
+            #to the low value
             tmpMid = tmpLow + (tmpHigh - tmpLow) // 2
 
+            #Get the value in the middle to determine if we
+            #should use the upper or lower window
             tmpLookupVal = findX.lookup(tmpMid)
 
+            #Set the index if the value happens to be our mid value
             if tmpLookupVal == x:
                 theIndex = tmpMid
 
                 break
-
-            if tmpLookupVal is None or tmpLookupVal > x:
+            #If the value is None or larger than x,
+            #we need to use the lower window
+            elif tmpLookupVal is None or tmpLookupVal > x:
                 tmpHigh = tmpMid - 1
+            #Otherwise, we need to use the upper window
             else:
                 tmpLow = tmpMid + 1
 
