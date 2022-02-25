@@ -26,7 +26,53 @@ def findXinA(x, findX):
 
     #TODO Your Code Begins Here, DO NOT MODIFY ANY CODE ABOVE THIS LINE
 
+    tmpLow = 0
+    tmpHigh = 1
+    tmpMid = 0
+    tmpLookupVal = findX.lookup(0)
+
     theIndex = None # replace None with the index of x
+
+    #Try to find the length of the array
+    while tmpLookupVal is not None and tmpLookupVal < x:
+        #Check if the counter happens to be the index; if it is,
+        #set that it was found and break out of the loop
+        if tmpLookupVal == x:
+            theIndex = tmpLookupVal
+
+            break
+
+        #If the counter has a value and less than the x value,
+        #move the low position of window up and re-adjust the high position
+        tmpLow = tmpHigh
+        tmpHigh = tmpHigh * 9
+        tmpLookupVal = findX.lookup(tmpHigh)
+
+    #If the x value wasn't found while trying to determine the array size,
+    #work on the smaller set of data
+    if theIndex is None:
+        while tmpLow <= tmpHigh:
+            #Print debug info
+            # print(f"Lookup {findX.lookups()}:")
+            # print(f"   tmpHigh: {tmpHigh}")
+            # print(f"   tmpMid: {tmpMid}")
+            # print(f"   tmpLow: {tmpLow}")
+            # print(f"   tmpLookupVal: {tmpLookupVal}")
+            # print(f"   x: {x}")
+
+            tmpMid = tmpLow + (tmpHigh - tmpLow) // 2
+
+            tmpLookupVal = findX.lookup(tmpMid)
+
+            if tmpLookupVal == x:
+                theIndex = tmpMid
+
+                break
+
+            if tmpLookupVal is None or tmpLookupVal > x:
+                tmpHigh = tmpMid - 1
+            else:
+                tmpLow = tmpMid + 1
 
     #TODOne Your code Ends here, DO NOT MOIDFY ANYTHING BELOW THIS LINE
 
