@@ -29,7 +29,7 @@ def findXinA(x, findX):
     tmpLow = 0
     tmpHigh = 1
     tmpMid = 0
-    tmpLookupVal = findX.lookup(0)
+    tmpLookupVal = 0
 
     theIndex = None # replace None with the index of x
 
@@ -48,7 +48,7 @@ def findXinA(x, findX):
         #If the counter has a value and less than the x value,
         #move the low position of window up and re-adjust the high position
         tmpLow = tmpHigh
-        tmpHigh = tmpHigh * 9
+        tmpHigh = tmpHigh * 3
         tmpLookupVal = findX.lookup(tmpHigh)
 
     #If the x value wasn't found while trying to determine the array size,
