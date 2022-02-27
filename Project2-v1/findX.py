@@ -38,6 +38,9 @@ def findXinA(x, findX):
     #the high value represents a None object in the array
     #and the value in the high position doesn't exceed the value of x
     while tmpLookupVal is not None and tmpLookupVal < x:
+        #Get the value in the high position to see if we have passed the value
+        tmpLookupVal = findX.lookup(tmpHigh)
+
         #Check if the counter happens to be the index; if it is,
         #set that it was found and break out of the loop
         if tmpLookupVal == x:
@@ -48,8 +51,7 @@ def findXinA(x, findX):
         #If the counter has a value and less than the x value,
         #move the low position of window up and re-adjust the high position
         tmpLow = tmpHigh
-        tmpHigh = tmpHigh * 3
-        tmpLookupVal = findX.lookup(tmpHigh)
+        tmpHigh = tmpHigh * 4
 
     #If the x value wasn't found while trying to determine the array size,
     #work on the smaller set of data
