@@ -23,7 +23,6 @@ import GA_ProjectUtils as util
 
 
 def findXinA(x, findX):
-
     #TODO Your Code Begins Here, DO NOT MODIFY ANY CODE ABOVE THIS LINE
 
     tmpLow = 0
@@ -38,9 +37,6 @@ def findXinA(x, findX):
     #the high value represents a None object in the array
     #and the value in the high position doesn't exceed the value of x
     while tmpLookupVal is not None and tmpLookupVal < x:
-        #Get the value in the high position to see if we have passed the value
-        tmpLookupVal = findX.lookup(tmpHigh)
-
         #Check if the counter happens to be the index; if it is,
         #set that it was found and break out of the loop
         if tmpLookupVal == x:
@@ -51,24 +47,19 @@ def findXinA(x, findX):
         #If the counter has a value and less than the x value,
         #move the low position of window up and re-adjust the high position
         tmpLow = tmpHigh
-        tmpHigh = tmpHigh * 4
+        tmpHigh = tmpHigh * 3
+
+        #Get the value in the high position to see if we have passed the value
+        tmpLookupVal = findX.lookup(tmpHigh)
 
     #If the x value wasn't found while trying to determine the array size,
     #work on the smaller set of data
     if theIndex is None:
         while tmpLow <= tmpHigh:
-            #Print debug info
-            # print(f"Lookup {findX.lookups()}:")
-            # print(f"   tmpHigh: {tmpHigh}")
-            # print(f"   tmpMid: {tmpMid}")
-            # print(f"   tmpLow: {tmpLow}")
-            # print(f"   tmpLookupVal: {tmpLookupVal}")
-            # print(f"   x: {x}")
-
             #Calculate the mid between the high and low by
             #adding half the difference between the high and low
             #to the low value
-            tmpMid = tmpLow + (tmpHigh - tmpLow) // 2
+            tmpMid = (tmpLow + tmpHigh) // 2
 
             #Get the value in the middle to determine if we
             #should use the upper or lower window
