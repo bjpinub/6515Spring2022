@@ -47,7 +47,7 @@ def findXinA(x, findX):
         #If the counter has a value and less than the x value,
         #move the low position of window up and re-adjust the high position
         tmpLow = tmpHigh
-        tmpHigh = tmpHigh * 3
+        tmpHigh = tmpHigh * 2
 
         #Get the value in the high position to see if we have passed the value
         tmpLookupVal = findX.lookup(tmpHigh)
