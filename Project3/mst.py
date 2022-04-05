@@ -15,6 +15,7 @@ class unionFind:
         self.pi = [i for i in range(n)]
         self.rank = [0 for i in range(n)]
 
+
     def areConnected(self, p, q):
         """
             return true if 2 nodes are connected or false if they are
@@ -22,6 +23,7 @@ class unionFind:
         """
         #TODO Your Code Goes Here
         pass
+
 
     def union(self, u, v):
         """
@@ -31,6 +33,7 @@ class unionFind:
         """
         #TODO Your Code Goes Here (remove pass)
         pass
+
 
     def find(self, p):
         """
@@ -47,10 +50,13 @@ def kruskal(G):
     """
     #Build unionFind Object
     uf = unionFind(G.numVerts)
+
     #Make MST as a set
     MST = set()    
+
     #Get list of edges sorted by increasing weight
     sortedEdges = G.sortedEdges()   
+
     #Go through edges in sorted order smallest, to largest
     for e in sortedEdges:
         #TODO Your Code Goes Here (remove comments if you wish)
@@ -68,8 +74,10 @@ def main():
     """
     #DO NOT REMOVE ANY ARGUMENTS FROM THE ARGPARSER BELOW
     parser = argparse.ArgumentParser(description='Minimum Spanning Tree Coding Quiz')
+
     #use this flag, or change the default here to use different graph description files
     parser.add_argument('-g', '--graphFile',  help='File holding graph data in specified format', default='small.txt', dest='graphDataFileName')
+
     #use this flag to print the graph and resulting MST
     parser.add_argument('-p', '--print', help='Print the MSTs?', default=False, dest='printMST')
 
