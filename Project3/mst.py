@@ -22,6 +22,8 @@ class unionFind:
             not by comparing their roots
         """
 
+        #Check if the root nodes match between the 2 nodes;
+        #return true if they match or false if they don't
         if self.find(p) == self.find(q):
             return True
         else:
@@ -35,9 +37,13 @@ class unionFind:
             make sure your algorithm is optimal.
         """
 
+        #Save the root IDs of the passed parameters
         tmpURoot = self.find(u)
         tmpVRoot = self.find(v)
 
+        #If the values are the same, no further processing is needed;
+        #however, if they aren't the same, set the parent ID of the
+        #u root node to the ID of the v root
         if tmpURoot == tmpVRoot:
             return
         else:
@@ -49,6 +55,8 @@ class unionFind:
             passed vertex p - Must use path compression!
         """
 
+        #Keep calling find until the top-most root of
+        #the set is found
         if self.pi[p] != p:
             self.pi[p] = self.find(self.pi[p])
 
@@ -73,8 +81,13 @@ def kruskal(G):
     for e in sortedEdges:
         #TODO Your Code Goes Here (remove comments if you wish)
 
+        #Get the left and right vertex for the given edge
         tmpU, tmpV = e
 
+        #If the two vertices are already connected, there is no
+        #need to add a connection;
+        #otherwise, the set of u vertices needs to be unioned/joined
+        #with the set of v vertices
         if uf.areConnected(tmpU, tmpV):
             continue
         else:
