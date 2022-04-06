@@ -21,8 +21,11 @@ class unionFind:
             return true if 2 nodes are connected or false if they are
             not by comparing their roots
         """
-        #TODO Your Code Goes Here
-        pass
+
+        if self.find(p) == self.find(q):
+            return True
+        else:
+            return False
 
 
     def union(self, u, v):
@@ -31,17 +34,26 @@ class unionFind:
             Be sure to maintain self.rank as needed to
             make sure your algorithm is optimal.
         """
-        #TODO Your Code Goes Here (remove pass)
-        pass
 
+        tmpURoot = self.find(u)
+        tmpVRoot = self.find(v)
+
+        if tmpURoot == tmpVRoot:
+            return
+        else:
+            self.pi[tmpURoot] = tmpVRoot
 
     def find(self, p):
         """
             find the root of the set containing the
             passed vertex p - Must use path compression!
         """
-        #TODO Your Code Goes Here
-        pass
+
+        if self.pi[p] != p:
+            self.pi[p] = self.find(self.pi[p])
+
+        return self.pi[p]
+
 
 def kruskal(G):
     """
@@ -61,9 +73,16 @@ def kruskal(G):
     for e in sortedEdges:
         #TODO Your Code Goes Here (remove comments if you wish)
 
-        # use the following line to add an edge to the MST.
-        # You may change it's indentation/scope within the for loop
-        MST.add(util.buildMSTEdge(G,e))
+        tmpU, tmpV = e
+
+        if uf.areConnected(tmpU, tmpV):
+            continue
+        else:
+            uf.union(tmpU, tmpV)
+
+            # use the following line to add an edge to the MST.
+            # You may change it's indentation/scope within the for loop
+            MST.add(util.buildMSTEdge(G,e))
 
         #TODone - do not modify any other code below this line
     return MST, uf
