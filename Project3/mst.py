@@ -41,13 +41,22 @@ class unionFind:
         tmpURoot = self.find(u)
         tmpVRoot = self.find(v)
 
-        #If the values are the same, no further processing is needed;
-        #however, if they aren't the same, set the parent ID of the
-        #u root node to the ID of the v root
+        #If the values are the same, no further processing is needed
         if tmpURoot == tmpVRoot:
             return
+
+        #If the rank of u is more than v, update the root of
+        #v to be the root of u;
+        #otherwise, set the root of u to the root of v
+        if self.rank[tmpURoot] > self.rank[tmpVRoot]:
+            self.pi[tmpVRoot] = tmpURoot
         else:
             self.pi[tmpURoot] = tmpVRoot
+
+            #If the ranks are the same between u and v,
+            #increment the rank of v by 1
+            if self.rank[tmpURoot] == self.rank[tmpVRoot]:
+                self.rank[tmpVRoot] = self.rank[tmpVRoot] + 1
 
     def find(self, p):
         """
